@@ -10,6 +10,9 @@ const cookieParser = require('cookie-parser');
 const multer = require('multer');
 const uploadMiddleware = multer({ dest: 'uploads/' });
 const fs = require('fs');
+const morgan = require('morgan')
+
+app.use(morgan('dev'))
 
 const salt = bcrypt.genSaltSync(10);
 const secret = 'asdfe45we45w345wegw345werjktjwertkj';
@@ -21,7 +24,7 @@ app.use('/uploads', express.static(__dirname + '/uploads'));
 
 mongoose.set('strictQuery', true);
 mongoose.connect(`mongodb://database:Password@ac-u5lde51-shard-00-00.eyiecuw.mongodb.net:27017,ac-u5lde51-shard-00-01.eyiecuw.mongodb.net:27017,ac-u5lde51-shard-00-02.eyiecuw.mongodb.net:27017/?ssl=true&replicaSet=atlas-jb67aj-shard-0&authSource=admin&retryWrites=true&w=majority`, () => {
-    console.log('Connected Successfully');
+    console.log('Mongo Connected Successfully');
 });
 
 
@@ -36,7 +39,7 @@ app.post('/register', async (req, res) => {
         });
         res.json(userDoc);
     } catch (e) {
-        // console.log(e);
+        //console.log(e);
         res.status(400).json(e);
     }
 });
@@ -158,4 +161,3 @@ app.delete('/post/:id', async (req, res) => {
 })
 
 app.listen(4000);
-//
