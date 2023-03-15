@@ -15,7 +15,7 @@ export default function PostPage() {
     const { userInfo } = useContext(UserContext);
     const { id } = useParams();
     useEffect(() => {
-        fetch(`http://localhost:4000/post/${id}`)
+        fetch(`https://myblogs-r0z6.onrender.com/post/${id}`)
             .then(response => {
                 response.json().then(postInfo => {
                     setPostInfo(postInfo);
@@ -26,7 +26,7 @@ export default function PostPage() {
     if (!postInfo) return '';
 
     const deletPost = async () => {
-        const respons = await fetch(`http://localhost:4000/post/${id}`, {
+        const respons = await fetch(`https://myblogs-r0z6.onrender.com/post/${id}`, {
             method: 'DELETE',
             credentials: "include"
         });
@@ -66,7 +66,7 @@ export default function PostPage() {
                 )}
             </div>
             <div className="image">
-                <img src={`http://localhost:4000/${postInfo.cover}`} alt="" />
+                <img src={`https://myblogs-r0z6.onrender.com/${postInfo.cover}`} alt="" />
             </div>
             <div className="content" dangerouslySetInnerHTML={{ __html: postInfo.content }} />
         </div>
